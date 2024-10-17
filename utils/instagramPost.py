@@ -3,20 +3,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
-from utils.setupSelenium import prepareChromeAndSelenium
 from utils.guiHelper import selectTheMedia
-import json, os
-import pyperclip
 import pyautogui as pi
 
 def removeBMP(text):
     return ''.join(char for char in text if ord(char) <= 0xFFFF)
 
-_,thisDriver = prepareChromeAndSelenium()
-
 def makePostOnInstagram(thisDriver, postData):
     thisDriver.get("https://www.instagram.com/")
-    thisCaption = """CAPTION HERE!"""
 
     sleep(2)
     createButton = WebDriverWait(thisDriver, 10).until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Create']")))
@@ -48,8 +42,8 @@ def makePostOnInstagram(thisDriver, postData):
         print("Element not found.")
     # ratioButton.click()
 
-    selectRatio = WebDriverWait(thisDriver, 10).until(EC.element_to_be_clickable((By.XPATH, "//span[text()='9:16']")))
-    selectRatio.click()
+    # selectRatio = WebDriverWait(thisDriver, 10).until(EC.element_to_be_clickable((By.XPATH, "//span[text()='9:16']")))
+    # selectRatio.click()
 
     nextButton = WebDriverWait(thisDriver, 10).until(EC.element_to_be_clickable((By.XPATH, "//div[text()='Next']")))
     nextButton.click()
@@ -57,14 +51,15 @@ def makePostOnInstagram(thisDriver, postData):
     nextButton = WebDriverWait(thisDriver, 10).until(EC.element_to_be_clickable((By.XPATH, "//div[text()='Next']")))
     nextButton.click()
 
-    currentWord = contentLocation.split("/")[-1].replace(".mp4","")
-    print(currentWord)
-    thisCaption += f"\n\nCurrent Word: {currentWord} \nFollow to learn New English Words everyday.\n\n#vocab #grevocabulary #grewords #grevocab #ielts #vocab #learning #english #word #wordofgod #wordgasm #wordoftheday #wordofday #meme"
+    # currentWord = contentLocation.split("/")[-1].replace(".mp4","")
+    # print(currentWord)
+    # thisCaption = f"\n\nCurrent Word: {currentWord} \nFollow to learn New English Words everyday.\n\n#vocab #grevocabulary #grewords #grevocab #ielts #vocab #learning #english #word #wordofgod #wordgasm #wordoftheday #wordofday #meme"
+    thisCaption = postData['content']
     print(thisCaption)
 
     captionText = WebDriverWait(thisDriver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".xw2csxc.x1odjw0f.x1n2onr6.x1hnll1o.xpqswwc.xl565be.x5dp1im.xdj266r.x11i5rnm.xat24cr.x1mh8g0r.x1w2wdq1.xen30ot.x1swvt13.x1pi30zi.xh8yej3.x5n08af.notranslate")))
     captionText.click()
     captionText.send_keys(removeBMP(thisCaption))
 
-    nextButton = WebDriverWait(thisDriver, 10).until(EC.element_to_be_clickable((By.XPATH, "//div[text()='Share']")))
-    nextButton.click()
+    # nextButton = WebDriverWait(thisDriver, 10).until(EC.element_to_be_clickable((By.XPATH, "//div[text()='Share']")))
+    # nextButton.click()

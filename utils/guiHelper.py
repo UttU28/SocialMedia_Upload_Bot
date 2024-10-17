@@ -2,12 +2,13 @@ from time import sleep
 import pyautogui as pi
 
 def splitTheData(thisData):
-    fileDir = ''.join(thisData.split("/")[:-1])
+    fileDir = '/'.join(thisData.split("/")[:-1])
     fileName = thisData.split("/")[-1]    
     return fileDir, fileName
 
 def selectTheMedia(imageLocation):
     contentLocation, contentName = splitTheData(imageLocation)
+
     sleep(0.5)
     pi.hotkey('ctrl', 'l')
     sleep(1)
