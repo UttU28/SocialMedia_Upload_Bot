@@ -6,4 +6,4 @@ pyautogui
 opencv-python
 Flask
 pandas
-openpyxl
+openpyxl1
